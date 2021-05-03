@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,11 +22,20 @@ use Illuminate\Support\Facades\Route;
 // 4. update and single (put/patch) /api/posts/{id}
 // 5.delete (delete) /api/posts/{id}
 
-Route::get('/posts');
+Route::get('/posts', function() {
+    $post = Post::create([
+        'title' => 'my first post', 
+        'slug' => 'my-first-post'
+    ]);
+    return $post;
+});
+Route::resource('posts', 'App\Http\Controllers\PostController');
+
+
 
 //to create a resource (posts) in laravel
 //1. create the database and migrations
-//2. createa  model
+//2. create  model
 //2.5 create a service? Eloquent
 //3. create controller to get info from database
 //4. return that info
